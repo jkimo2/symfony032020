@@ -4,10 +4,12 @@
 namespace App\Controller;
 
 
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 
-class HelloController
+class HelloController extends AbstractController
 {
+    public const MILE_IN_KILOMETER = 1.609;
     public function hello()
     {
         $response = new Response();
@@ -16,5 +18,15 @@ class HelloController
         $response->setStatusCode(Response::HTTP_PARTIAL_CONTENT);
 
         return $response;
+    }
+
+    public function convert($kilometres)
+    {
+        $miles = $kilometres / self::MILE_IN_KILOMETER;
+
+        return $this->json([
+            'kilometers' => $kilometres,
+            'miles'=> $miles
+        ]);
     }
 }
