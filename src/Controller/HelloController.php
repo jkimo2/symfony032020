@@ -21,7 +21,7 @@ class HelloController extends AbstractController
     }
     public function hello2()
     {
-        dump("toto");
+        //dump("toto"); //retirer avant fusion git dans la master
         return new Response("<body><h1>Bonjour tout le monde</h1>hello 2</body>");
     }
 
