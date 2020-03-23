@@ -1,3 +1,16 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
+hello_first:
+    path: /
+    controller: App\Controller\HelloController::hello
+hello_two:
+    path: /hello2
+    controller: App\Controller\HelloController::hello2
+hello_convert:
+    path: /convert_km/{kilometres}
+    controller:  App\Controller\HelloController::convertKm
+    requirements:
+        kilometers: \d+
+hello_convert2:
+    path: /convert_mile/{miles}
+    controller:  App\Controller\HelloController::convertMile
+    requirements:
+        miles: \d+
