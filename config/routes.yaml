@@ -1,6 +1,9 @@
 hello_first:
     path: /
     controller: App\Controller\HelloController::hello
+hello_two:
+    path: /hello2
+    controller: App\Controller\HelloController::hello2
 hello_convert:
     path: /convert_km/{kilometres}
     controller:  App\Controller\HelloController::convertKm

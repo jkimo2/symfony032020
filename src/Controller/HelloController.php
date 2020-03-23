@@ -14,10 +14,15 @@ class HelloController extends AbstractController
     {
         $response = new Response();
         $response->setContent("Bonjour tout le monde");
-        $response->headers->set('Content-Type',"text/plain");
+        $response->headers->set('Content-Type',"html");
         $response->setStatusCode(Response::HTTP_PARTIAL_CONTENT);
 
         return $response;
+    }
+    public function hello2()
+    {
+        dump("toto");
+        return new Response("<body><h1>Bonjour tout le monde</h1>hello 2</body>");
     }
 
     public function convertKm(int $kilometres)
