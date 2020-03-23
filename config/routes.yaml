@@ -2,5 +2,12 @@ hello_first:
     path: /
     controller: App\Controller\HelloController::hello
 hello_convert:
-    path: /convert/{kilometres}
-    controller:  App\Controller\HelloController::convert
+    path: /convert_km/{kilometres}
+    controller:  App\Controller\HelloController::convertKm
+    requirements:
+        kilometers: \d+
+hello_convert2:
+    path: /convert_miles/{miles}
+    controller:  App\Controller\HelloController::convertMile
+    requirements:
+        miles: \d+
