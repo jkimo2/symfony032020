@@ -7,7 +7,7 @@ hello_convert:
     requirements:
         kilometers: \d+
 hello_convert2:
-    path: /convert_miles/{miles}
+    path: /convert_mile/{miles}
     controller:  App\Controller\HelloController::convertMile
     requirements:
         miles: \d+
