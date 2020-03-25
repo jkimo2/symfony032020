@@ -65,11 +65,11 @@ class BoardGameController extends AbstractController
     }
 
     /**
-     * @Route("/edit/{id}",requirements={"id" : "\d+"},methods={"GET","POST"}))
+     * @Route("/edit/{id}",requirements={"id" : "\d+"},methods={"GET","PUT"}))
      */
     public function edit(BoardGame $game,Request $request,EntityManagerInterface $em)
     {
-        $form = $this->createFormBuilder($game)
+        $form = $this->createFormBuilder($game, ['method'=>'PUT'])
             ->add('name',null,['label'=>'Nom'])
             ->add('description',null,['label'=>'Description'])
             ->add('releasedAt',DateType::class,['html5' => true, 'widget' => 'single_text','label'=>'Date de sortie'])
