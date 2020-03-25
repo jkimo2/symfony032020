@@ -5,10 +5,10 @@ namespace App\Controller;
 
 
 use App\Entity\BoardGame;
+use App\Form\BoardGameType;
 use App\Repository\BoardGameRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\Extension\Core\Type\DateType; //pas celle de Doctrine type
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 /**
@@ -43,12 +43,7 @@ class BoardGameController extends AbstractController
     public function new(Request $request,EntityManagerInterface $em)
     {
         $game = new BoardGame();
-        $form = $this->createFormBuilder($game)
-            ->add('name',null,['label'=>'Nom'])
-            ->add('description',null,['label'=>'Description'])
-            ->add('releasedAt',DateType::class,['html5' => true, 'widget' => 'single_text','label'=>'Date de sortie'])
-            ->add('ageGroup',null,['label'=>'A partir de (Age)'])
-            ->getForm();
+        $form = $this->createForm(BoardGameType::class, $game);
 
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
@@ -69,12 +64,7 @@ class BoardGameController extends AbstractController
      */
     public function edit(BoardGame $game,Request $request,EntityManagerInterface $em)
     {
-        $form = $this->createFormBuilder($game, ['method'=>'PUT'])
-            ->add('name',null,['label'=>'Nom'])
-            ->add('description',null,['label'=>'Description'])
-            ->add('releasedAt',DateType::class,['html5' => true, 'widget' => 'single_text','label'=>'Date de sortie'])
-            ->add('ageGroup',null,['label'=>'A partir de (Age)'])
-            ->getForm();
+        $form = $this->createForm(BoardGameType::class, $game, ['method'=>'PUT']);
 
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
