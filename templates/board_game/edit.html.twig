@@ -1,0 +1,7 @@
+{%  extends 'base.html.twig' %}
+
+{% block body %}
+    <a href="{{ path('app_boardgame_index') }}"> Liste </a>
+    <h1>Modifier le jeu {{ game.name }}</h1>
+    {{  include('board_game/_form.html.twig', {form : edit_form, action : 'Modifier'}) }}
+{% endblock %}

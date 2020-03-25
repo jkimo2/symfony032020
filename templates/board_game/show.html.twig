@@ -1,0 +1,27 @@
+{%  extends 'base.html.twig' %}
+
+{% block body %}
+    <a href="{{ path('app_boardgame_index') }}"> Liste </a>
+    <h1>Voici le jeux {{ board_game.name }}</h1>
+
+    Description : <br>
+    {% if  board_game.description %} {{  board_game.description }} {% endif %}
+    <hr>
+    Date de Sortie : {{ board_game.releasedAt | date('d/m/Y') }}
+    <br>
+    A partir de : {{ board_game.ageGroup }} ans
+    <br>
+    Id : {{ board_game.id }}
+    <hr>
+
+    {% if  board_game.categories is not empty %}
+    Ce jeu fait partie des catégories suivantes : <br>
+        <ul>
+        {% for cat in board_game.categories %}
+            <li>{{ cat.name }}</li>
+        {%  endfor %}
+        </ul>
+    {%  else %}
+    Ce jeu n'est dans aucune catégorie
+    {%  endif  %}
+{% endblock %}
