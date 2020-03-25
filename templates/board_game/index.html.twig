@@ -1,0 +1,20 @@
+{%  extends 'base.html.twig' %}
+
+{% block body %}
+
+    <h1>Liste des jeux</h1>
+    <table>
+        <tr>
+        <th>Nom</th>
+        <th>Description</th>
+        <th>Age</th>
+        </tr>
+        {% for board_game in board_games %}
+            <tr>
+                <td><a href="{{ path('app_boardgame_show', {id:board_game.id} ) }}">{{ board_game.name }}</a></td>
+            <td>{{ board_game.description }}</td>
+            <td>{{ board_game.ageGroup }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

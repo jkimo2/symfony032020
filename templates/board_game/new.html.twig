@@ -1,0 +1,10 @@
+{%  extends 'base.html.twig' %}
+
+{% block body %}
+    <a href="{{ path('app_boardgame_index') }}"> Liste </a>
+    <h1>Créer un jeu</h1>
+    {{  form_start(new_form) }}
+    {{  form_widget(new_form) }}
+    <button>Créer</button>
+    {{  form_end(new_form) }}
+{% endblock %}
