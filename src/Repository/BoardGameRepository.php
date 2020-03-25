@@ -19,32 +19,32 @@ class BoardGameRepository extends ServiceEntityRepository
         parent::__construct($registry, BoardGame::class);
     }
 
-    // /**
-    //  * @return BoardGame[] Returns an array of BoardGame objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+      * @return BoardGame[]
+      */
+    public function findWithCategories()
     {
-        return $this->createQueryBuilder('b')
-            ->andWhere('b.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('b.id', 'ASC')
+        return $this->createQueryBuilder('b')  //select * from board_game déjà inclus
+            ->leftJoin('b.categories', 'c')
+            ->addSelect('c')
+            ->orderBy('b.releasedAt', 'DESC')
             ->setMaxResults(10)
             ->getQuery()
             ->getResult()
-        ;
+            ;
     }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?BoardGame
+    /**
+     * @return BoardGame[]
+     */
+    public function findWithCategories2()
     {
-        return $this->createQueryBuilder('b')
-            ->andWhere('b.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        return $this->getEntityManager()->createQuery(
+            'SELECT b, c FROM '.BoardGame::class.' b '      //SELECT b.* récupère un tableau  //SELECT b.id, b.name  récupère aussi un tableau
+                 .'LEFT JOIN b.categories c '
+                 .' ORDER BY b.releasedAt DESC '
+            )
+            ->setMaxResults(10)
+            ->getResult();
     }
-    */
 }

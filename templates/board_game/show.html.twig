@@ -13,4 +13,15 @@
     <br>
     Id : {{ board_game.id }}
     <hr>
+
+    {% if  board_game.categories is not empty %}
+    Ce jeu fait partie des catégories suivantes : <br>
+        <ul>
+        {% for cat in board_game.categories %}
+            <li>{{ cat.name }}</li>
+        {%  endfor %}
+        </ul>
+    {%  else %}
+    Ce jeu n'est dans aucune catégorie
+    {%  endif  %}
 {% endblock %}

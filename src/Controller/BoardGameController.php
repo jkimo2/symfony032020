@@ -22,6 +22,7 @@ class BoardGameController extends AbstractController
     public function index(BoardGameRepository $repository)
     {
         $boardGames = $repository->findAll();
+        $boardGames = $repository->findWithCategories2(); //il faut la créer - elle récupère les jeux avec leurs catégories pour éviter de fait un chargement jeu par jeu des catégories dans le tempaltes index
         return$this->render('board_game/index.html.twig',[
             'board_games' => $boardGames,
         ]);
