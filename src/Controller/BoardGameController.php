@@ -6,9 +6,10 @@ namespace App\Controller;
 
 use App\Entity\BoardGame;
 use App\Repository\BoardGameRepository;
-use Psr\Container\ContainerInterface;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\DateType; //pas celle de Doctrine type
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/board-game")
@@ -38,7 +39,7 @@ class BoardGameController extends AbstractController
     /**
      * @Route("/new")
      */
-    public function new()
+    public function new(Request $request,EntityManagerInterface $em)
     {
         $game = new BoardGame();
         $form = $this->createFormBuilder($game)
@@ -47,6 +48,15 @@ class BoardGameController extends AbstractController
             ->add('releasedAt',DateType::class,['html5' => true, 'widget' => 'single_text','label'=>'Date de sortie'])
             ->add('ageGroup',null,['label'=>'A partir de (Age)'])
             ->getForm();
+
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+            $em->persist($game);
+            $em->flush();  //lance l'ensemble des requetes SQL , symfony optimise les requetes (si il y a +ieurs insert into , ca va etre regroupé)
+            $this->addFlash( 'success', 'Nouveau jeu inséré');
+
+            return $this->redirectToRoute('app_boardgame_show',['id'=>$game->getId()]);
+        }
 
         return $this->render('board_game/new.html.twig',[
             'new_form' => $form->createView(),

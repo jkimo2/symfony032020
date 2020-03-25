@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +8,12 @@
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
+        {%  for label,msgs in app.flashes %}
+            {%  for msg in msgs %}
+            <div class="{{ label }}"> {{ msg }}</div>
+            {% endfor %}
+        {% endfor %}
+
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
     </body>
