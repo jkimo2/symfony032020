@@ -36,6 +36,7 @@ class BoardGameController extends AbstractController
             'board_game' => $boardGame,
         ]);
     }
+
     /**
      * @Route("/new")
      */
@@ -60,6 +61,32 @@ class BoardGameController extends AbstractController
 
         return $this->render('board_game/new.html.twig',[
             'new_form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/edit/{id}",requirements={"id" : "\d+"},methods={"GET","POST"}))
+     */
+    public function edit(BoardGame $game,Request $request,EntityManagerInterface $em)
+    {
+        $form = $this->createFormBuilder($game)
+            ->add('name',null,['label'=>'Nom'])
+            ->add('description',null,['label'=>'Description'])
+            ->add('releasedAt',DateType::class,['html5' => true, 'widget' => 'single_text','label'=>'Date de sortie'])
+            ->add('ageGroup',null,['label'=>'A partir de (Age)'])
+            ->getForm();
+
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+            $em->flush();  //lance l'ensemble des requetes SQL , symfony optimise les requetes (si il y a +ieurs insert into , ca va etre regroupé)
+            $this->addFlash( 'success', 'Jeu modifié');
+
+            return $this->redirectToRoute('app_boardgame_show',['id'=>$game->getId()]);
+        }
+
+        return $this->render('board_game/edit.html.twig',[
+            'edit_form' => $form->createView(),
+            'game' => $game,
         ]);
     }
 }
