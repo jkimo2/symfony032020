@@ -14,6 +14,7 @@
                 <td><a href="{{ path('app_boardgame_show', {id:board_game.id} ) }}">{{ board_game.name }}</a></td>
             <td>{{ board_game.description }}</td>
             <td>{{ board_game.ageGroup }}</td>
+                <td><a href="{{ path('app_boardgame_edit', {id:board_game.id} ) }}">Edit</a></td>
             </tr>
         {% endfor %}
     </table>
