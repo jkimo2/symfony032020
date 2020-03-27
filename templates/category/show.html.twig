@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CategoryController!{% endblock %}
+
+{% block body %}
+
+
+<div class="example-wrapper">
+    <h1>{{ category.name }}</h1>
+
+    Liste des jeux associés :
+    <ul>
+        {%  for game in listeGames %}
+            <li> <a href="{{ path('app_boardgame_show', {id : game.id}) }}">{{ game.name }}</a></li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

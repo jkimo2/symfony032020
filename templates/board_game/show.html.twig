@@ -12,6 +12,8 @@
     A partir de : {{ board_game.ageGroup }} ans
     <br>
     Id : {{ board_game.id }}
+    <br>
+    Créateur : {{ board_game.createur.email }}
     <hr>
 
     {% if  board_game.categories is not empty %}
@@ -24,4 +26,8 @@
     {%  else %}
     Ce jeu n'est dans aucune catégorie
     {%  endif  %}
+    <hr>
+    {% if is_granted('ROLE_ADMIN') %}
+        <a href="{{ path('app_admin_boardgame_edit', {id: board_game.id}) }}"> Modifier </a>
+    {% endif %}
 {% endblock %}

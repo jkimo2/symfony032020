@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\BoardGame;
 use App\Entity\Category;
+use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -30,6 +31,10 @@ class BoardGameType extends AbstractType
                 'multiple' => true,
                 'label' => 'Catégories',
                 'required' => false,
+            ])->add('toto', EntityType::class, [
+                'class' => User::class,
+                'property_path' => 'createur',
+                'choice_label' => 'email'
             ])
         ;
     }

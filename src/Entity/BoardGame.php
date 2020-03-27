@@ -45,9 +45,32 @@ class BoardGame
     private $ageGroup;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Category")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Category", inversedBy="boardGames")
      */
     private $categories;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $createur;
+
+    /**
+     * @return User
+     */
+    public function getCreateur(): ?User
+    {
+        return $this->createur;
+    }
+
+    /**
+     * @param User $createur
+     */
+    public function setCreateur(?User $createur): self
+    {
+        $this->createur = $createur;
+        return $this;
+    }
 
     public function __construct()
     {
@@ -132,4 +155,6 @@ class BoardGame
 
         return $this;
     }
+
+
 }

@@ -26,7 +26,7 @@
                     Ce jeu n'est dans aucune catégorie
                 {%  endif  %}
             </td>
-            <td><a href="{{ path('app_boardgame_edit', {id:board_game.id} ) }}">Edit</a></td>
+            <td><a href="{{ path('app_admin_boardgame_edit', {id:board_game.id} ) }}">Edit</a></td>
             </tr>
         {% endfor %}
     </table>

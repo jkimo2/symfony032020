@@ -47,4 +47,30 @@ class BoardGameRepository extends ServiceEntityRepository
             ->setMaxResults(10)
             ->getResult();
     }
+
+    /**
+     * @return BoardGame[]
+     */
+    public function findBelongTo($cat_id)
+    {
+        return $this->getEntityManager()->createQuery(
+            'SELECT b FROM '.BoardGame::class.' b '      //SELECT b.* récupère un tableau  //SELECT b.id, b.name  récupère aussi un tableau
+            .'LEFT JOIN b.categories c '
+            .' WHERE c.id = ' . $cat_id
+            .' ORDER BY b.releasedAt DESC '
+        )
+            ->setMaxResults(10)
+            ->getResult();
+
+      /*  return $this->createQueryBuilder('b')  //select * from board_game déjà inclus
+            ->leftJoin('b.categories', 'c')
+            ->where('c.id = :cat_id')
+            ->orderBy('b.releasedAt', 'DESC')
+            ->setMaxResults(10)
+            ->setParameter('cat_id',$cat_id)
+            ->getQuery()
+            ->getResult()
+            ;
+*/
+    }
 }
