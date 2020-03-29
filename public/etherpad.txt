@@ -1,0 +1,72 @@
+FORMATION SYMFONY
+ 
+LUNDI MATIN
+ 
+Installation de l'exécutable symfony:
+    wget https://get.symfony.com/cli/installer -O - | bash
+ 
+Apport au fichier de conf bash (ex: .bashrc)
+    # add local composer project and global composer bin directory to path
+    PATH="./vendor/bin:~/.composer/vendor/bin:$PATH"
+    # add global symfony bin directory to path
+    export PATH="$HOME/.symfony/bin:$PATH";
+ 
+Validation des pré-requis techniques:
+    symfony check:requirements
+ 
+Création du projet:
+    symfony new mon-projet # composer create-project symfony/skeleton mon-projet
+    cd mon-projet
+ 
+Validation du projet installé via composer:
+    composer validate
+    composer check-platform-reqs
+ 
+Vérification des failles de sécurité:
+    symfony check:security
+ 
+Visualisation du commit généré:
+    git status
+    git log --stat
+ 
+Ajout du dépôt distant:
+    git remote add origin git@github.com:pbreteche/symfony-20-03.git
+    git push -u origin master
+ 
+Exclusion du fichier/répertoire d'éditeur/IDE:
+    éditer .gitignore (si propre au projet)
+    ou
+    éditer .git/info/exclude (si propre au dépôt local)
+    ou
+    git conf --global core.excludesfile "/home/pierre/.gitignore_global" (si propre à l'environnement utilisateur)
+    éditer /home/pierre/.gitignore_global
+Exemple pour PhpStorm:
+    .idea
+ 
+LUNDI APRÈS-MIDI
+ 
+Démarrage PhpStorm - ouverture projet
+Installation plugin:
+    symfony -> gros plugin, plein d'aide pour Symfony
+    php toolbox -> meilleur type hinting
+    composer -> synchro conf IDE / composer.json
+    psr-4 -> meilleur complétion / namespace
+    .env -> coloration pour fichier .env
+    .ignore -> juste pour .gitignore
+ 
+ 
+ 
+putty, puttygen générer la clé + exporter au format openssl, pageant = mise à disposition clé publique
+ 
+https://github.com/pbreteche/symfony-20-03/blob/formulaire/src/Controller/BoardGameController.php
+ 
+Principe de «hash»
+histoire: bit de parité
+0110110 : 0  = donnée envoyée
+0010110 : 0 = deuxème bit modifié => erreur détectée !
+0011110 : 0 = plusieurs erreurs => éventuellement non-détectée...
+ 
+somme de contrôle:
+37689034234348 => somme des chiffres (récursive) => 60 => 6 => détecte 90% des erreurs car 10 valeurs possibles
+ 
+ 
