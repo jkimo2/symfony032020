@@ -1,0 +1,27 @@
+board_game:
+  index:
+    title: Liste des jeux
+  action:
+    edit: Modifier
+    new: 'Créer'
+  show:
+    title_category: 'Ce jeu fait partie des catégories suivantes'
+    no_category: Ce jeu ne fait partie d'aucune catégorie
+    group: '%value% ans'
+  new:
+    title: Nouveau jeu
+
+# Fields
+  name:
+    label: Nom
+  description:
+    no_value:
+    label: Decription
+  released_at:
+    label: Date de sortie
+  age_group:
+    label: A partir de
+  toto:
+    label: Créateur
+  categories:
+    label: Créateur

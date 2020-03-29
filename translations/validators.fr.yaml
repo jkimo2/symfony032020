@@ -1,0 +1,4 @@
+board_game:
+  before_today: Avant  {{ compared_value }}
+  not_too_old : pas trop vieux quand meme
+  positive: La valeur doit etre positive

@@ -17,19 +17,19 @@ class BoardGameType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name',null,['label'=>'Nom'])
-            ->add('description',null,['label'=>'Description'])
-            ->add('releasedAt',DateType::class,['html5' => true, 'widget' => 'single_text','label'=>'Date de sortie', 'attr' =>[
+            ->add('name')
+            ->add('description')
+            ->add('released_at',DateType::class,['html5' => true, 'widget' => 'single_text', 'attr' =>[
                 'max' => date("today")
             ]])
-            ->add('ageGroup',IntegerType::class,['label'=>'A partir de (Age)', 'attr' =>[
-                'min' => 0
+            ->add('age_group',IntegerType::class,[
+                'property_path' => 'ageGroup', 'attr' =>[
+                'min' => 0,
             ]])
             ->add('categories', EntityType::class,[
                 'class' => Category::class,
                 'choice_label' => 'name',
                 'multiple' => true,
-                'label' => 'Catégories',
                 'required' => false,
             ])->add('toto', EntityType::class, [
                 'class' => User::class,
@@ -43,6 +43,7 @@ class BoardGameType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => BoardGame::class,
+            'label_format'=>'board_game.%name%.label'
         ]);
     }
 }

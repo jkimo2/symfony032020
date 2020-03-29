@@ -33,14 +33,14 @@ class BoardGame
 
     /**
      * @ORM\Column(type="date")
-     * @Assert\LessThan("today" , message = "avant {{ compared_value }}" )
+     * @Assert\LessThan("today" , message = "board_game.before_today" )
      */
     private $releasedAt;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Assert\GreaterThan(0, message = "positif quand meme" )
-     * @Assert\LessThan(21, message = "pas trop vieux ? ")
+     * @Assert\GreaterThan(0, message = "board_game.positive" )
+     * @Assert\LessThan(21, message = "board_game.not_too_old")
      */
     private $ageGroup;
 

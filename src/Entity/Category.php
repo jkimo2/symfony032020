@@ -73,7 +73,7 @@ class Category
      */
     public function getBoardGames(): Collection
     {
-        return $this->$boardGames;
+        return $this->boardGames;
     }
 
     public function addBoardGames(BoardGames $boardGames): self

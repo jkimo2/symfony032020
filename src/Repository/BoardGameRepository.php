@@ -73,4 +73,9 @@ class BoardGameRepository extends ServiceEntityRepository
             ;
 */
     }
+
+    public function findSearch(array $criteria)
+    {
+        return $this->FindAll(); //on commence pour tester si la route marche
+    }
 }
